@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis Report</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Automated Data Analytics Report</h1>
+
+
+        <div class="card">
+
+            <h2>Dataset Summary</h2>
+
+            <p><strong>Total Rows:</strong> {{ total_rows }}</p>
+
+            <p><strong>Total Columns:</strong> {{ total_columns }}</p>
+
+            <p><strong>Duplicate Rows:</strong> {{ duplicate_rows }}</p>
+
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Column Names</h2>
+
+            <ul>
+
+                {% for column in columns %}
+
+                <li>{{ column }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>First 5 Rows</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        {% for column in columns %}
+
+                        <th>{{ column }}</th>
+
+                        {% endfor %}
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for row in preview %}
+
+                    <tr>
+
+                        {% for column in columns %}
+
+                        <td>{{ row[column] }}</td>
+
+                        {% endfor %}
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Missing Values</h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Column</th>
+
+                    <th>Missing Values</th>
+
+                </tr>
+
+
+                {% for column, value in missing_values.items() %}
+
+                <tr>
+
+                    <td>{{ column }}</td>
+
+                    <td>{{ value }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Data Types</h2>
+
+
+            <table>
+
+                <tr>
+
+                    <th>Column</th>
+
+                    <th>Data Type</th>
+
+                </tr>
+
+
+                {% for column, dtype in data_types.items() %}
+
+                <tr>
+
+                    <td>{{ column }}</td>
+
+                    <td>{{ dtype }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Statistics</h2>
+
+            {{ statistics | safe }}
+
+        </div>
+
+        <div class="card">
+
+            <h2>AI Insights</h2>
+
+            <p>
+                {{ai_insight}}
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>Graphs</h2>
+
+            {% for graph in graph_files %}
+
+            <img src="{{ url_for('static', filename=graph) }}" alt="Analysis Graph">
+
+            {% endfor%}
+
+        </div>
+
+
+
+        <br>
+
+
+        <a href="/">
+
+            <button>
+
+                Upload Another File
+
+            </button>
+
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>
