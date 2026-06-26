@@ -1,6 +1,5 @@
-FLASK - Web application framework
-PANDAS - Dataset reading and data analysis
-NUMPY - Numerical operations
-MATPLOTLIB - Data visualization and graphs
-SEABORN - Statistical data visualization
-OPENPYxL - Reading Excel (.xlsx) files
+FLASK 
+PANDAS 
+MATPLOTLIB 
+SEABORN 
+OPENPYxL 
