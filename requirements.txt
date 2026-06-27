@@ -1,5 +1,5 @@
-FLASK 
-PANDAS 
-MATPLOTLIB 
-SEABORN 
-OPENPYxL 
+flask 
+pandas
+matplotlib 
+seaborn
+openpyxl
