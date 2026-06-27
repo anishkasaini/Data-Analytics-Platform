@@ -28,20 +28,15 @@ def home():
 @app.route("/upload", methods=["POST"])
 def upload():
 
-    file = request.files.get("file")
-
-    if file is None:
-        return "No file uploaded."
-
-    if file.filename == "":
-        return "Please select a file."
-
-    file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
-    file.save(file_path)
-
-    
-
     try:
+        file = request.files.get("file")
+
+        if file is None or file.filename == "":
+            return "No file selected"
+
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+        file.save(file_path)
+
         if file.filename.lower().endswith(".csv"):
             df = pd.read_csv(file_path)
 
@@ -49,10 +44,12 @@ def upload():
             df = pd.read_excel(file_path)
 
         else:
-            return "Only CSV and Excel files are supported."
+            return "Only CSV and Excel allowed"
+
+        return "File uploaded successfully"
 
     except Exception as e:
-        return f"Error reading file: {str(e)}"
+        return f"ERROR: {str(e)}"
 
   
 
